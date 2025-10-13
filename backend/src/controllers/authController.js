@@ -49,6 +49,12 @@ const signup = async (req, res) => {
         });
 
         try {
+
+            if (!ENV.CLIENT_URL) {
+                console.error("CLIENT_URL not configured, skipping welcome email");
+                return;
+            }
+
             await sendWelcomeEmail(savedUser.email, savedUser.fullName, ENV.CLIENT_URL);
         } catch (error) {
             console.error("Error sending welcome email:", error);
