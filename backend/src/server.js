@@ -4,6 +4,7 @@ import messageRoutes from "./routes/messageRoutes.js";
 import path from "path";
 import { connectDB } from "./lib/db.js";
 import { ENV } from "./lib/env.js";
+import cookieParser from "cookie-parser";
 
 
  
@@ -15,6 +16,7 @@ const __dirname = path.resolve();
 
 //Middleware 
 app.use(express.json());// req.body
+app.use(cookieParser());
 
 //Routes 
 app.use("/api/auth", authRoutes);
