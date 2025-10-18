@@ -7,8 +7,16 @@ import {
  } from "../controllers/authController.js";
 
  import { protectRoute } from "../middleware/authMiddleware.js";
+import { arcjetProtection } from "../middleware/arcjetMiddleware.js";
+
 
 const router = express.Router();
+
+router.use(arcjetProtection);
+
+router.get("/test", arcjetProtection, (req, res) => {
+    res.status(200).json({message: "Arcjet protection working!"});
+})
 
 router.post("/signup", signup);
 router.post("/login", login),
